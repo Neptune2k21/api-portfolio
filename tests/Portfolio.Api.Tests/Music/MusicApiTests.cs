@@ -29,7 +29,7 @@ public sealed class MusicApiTests
     {
         await using var api = new ApiFactory();
 
-        var response = await api.CreateClient().GetAsync("/healthz");
+        var response = await api.CreateClient().GetAsync("/health");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
@@ -137,6 +137,7 @@ public sealed class MusicApiTests
             builder.UseSetting("Api:Key", "test-key");
             builder.UseSetting("LastFm:ApiKey", "unused");
             builder.UseSetting("LastFm:User", "tester");
+            builder.UseSetting("Articles:GitHubToken", "unused");
             builder.ConfigureTestServices(services =>
             {
                 services.AddSingleton<ILastFmClient>(LastFm);
